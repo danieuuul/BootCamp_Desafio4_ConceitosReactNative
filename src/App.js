@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-
+import update from 'react-addons-update';
 
 import api from './services/api';
 
@@ -22,12 +22,10 @@ export default function App() {
     })
   }, [])
 
-  async function handleLikeRepository(id) {
-    const repositoryIndex = repositories.findIndex((repo) => repo.id === id)
+  async function handleLikeRepository(id) {   
     api.post(`repositories/${id}/like`).then(response => {
-      repositories[repositoryIndex] = response.data
-      setRepositories([...repositories])    
-    })
+      setRepositories(repositories.map(
+        repo => repo.id === id ? response.data : repo))})
   }
 
   return (
