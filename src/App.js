@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import update from 'react-addons-update';
 
 import api from './services/api';
 
